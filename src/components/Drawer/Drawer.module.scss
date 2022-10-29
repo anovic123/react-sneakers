@@ -1,0 +1,236 @@
+.drawer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img {
+    cursor: pointer;
+  }
+  .drawerArrow {
+    opacity: 0.5;
+    transition: opacity 0.5s ease-in-out;
+    &:hover {
+      opacity: 1.5;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease-out, visibility 0.3s ease-out;
+  overflow: hidden;
+}
+
+.overlayVisible {
+  visibility: visible;
+  opacity: 1;
+  .drawerBlock {
+    transform: translateX(0);
+  }
+}
+
+.drawerBlock {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 385px;
+  right: 0;
+  height: 100%;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 30px;
+  overflow: auto;
+  transition: transform 0.5s ease-out;
+  .items {
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+}
+
+p {
+  font-size: 12px;
+}
+
+.drawerItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  border: 2px solid #dccccc;
+  padding: 13px;
+  border-radius: 20px;
+  overflow: hidden;
+  .drawerImg {
+    padding-bottom: 14px;
+    margin-right: 10px;
+  }
+  .drawerItemImg {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in-out;
+    &:hover {
+      opacity: 1.5;
+    }
+  }
+}
+
+.drawerTotalBlock {
+  ul {
+    margin-bottom: 20px;
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+    div {
+      flex: 1;
+      height: 1px;
+      border: 1px dashed #dccccc;
+      position: relative;
+      top: -4px;
+      margin: 0 5px;
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 55px;
+    background: #9dd558;
+    border-radius: 18px;
+    border: 0;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      background: lighten(#9dd558, 10%);
+    }
+
+    &:active {
+      background: darken(#9dd558, 10%);
+    }
+  }
+}
+
+.drawerButton {
+  position: relative;
+
+  &:disabled {
+    animation: button-loading 0.7s ease-in-out infinite;
+    background-color: #bebebe !important;
+    cursor: default;
+  }
+
+  &:hover {
+    img {
+      transform: translateX(15px);
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    transition: transform 0.2s ease-in-out;
+  }
+}
+.greenButton {
+  position: relative;
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s ease-in-out;
+
+  &:disabled {
+    background-color: #bebebe !important;
+    cursor: default;
+  }
+
+  &:hover {
+    background: lighten(#9dd558, 5%);
+  }
+
+  &:hover {
+    img {
+      transform: translateX(-15px);
+    }
+  }
+
+  &:active {
+    background: darken(#9dd558, 5%);
+  }
+
+  img {
+    transition: transform 0.2s ease-in-out;
+    top: 20px;
+    left: 35px;
+    position: absolute;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+.cartEmpty {
+  text-align: center;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
+
+    &:disabled {
+      background-color: #bebebe !important;
+      cursor: default;
+    }
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
+
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
