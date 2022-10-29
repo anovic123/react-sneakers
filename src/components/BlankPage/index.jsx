@@ -9,7 +9,7 @@ const BlankPage = ({ title, image, description }) => {
       <img src={image} alt="smile" />
       <h2>{title}</h2>
       <p>{description}</p>
-      <Link to="react-sneakers">
+      <Link to="react-sneakers/">
         <button className={styles.greenButton}>
           <img src="img/arrow.svg" alt="Arrow" />
           Вернуться назад
