@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import instanceURL from '../API/api';
 
 import Card from '../components/Card';
 import BlankPage from '../components/BlankPage';
@@ -11,7 +12,7 @@ const Orders = () => {
   React.useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('https://6357cd27c26aac906f32dc62.mockapi.io/orders');
+        const { data } = await axios.get(`${instanceURL}/orders`);
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {

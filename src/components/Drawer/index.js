@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import instanceUrl from '../../API/api';
 import Info from '../Info';
 import { useCart } from '../../hooks/useCart';
 import styles from './Drawer.module.scss';
@@ -15,7 +16,7 @@ const Drawer = ({ onClose, onRemove, items = [], opened }) => {
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get('https://6357cd27c26aac906f32dc62.mockapi.io/orders', {
+      const { data } = await axios.get(`${instanceUrl}/orders`, {
         items: cartItems,
       });
       setOrderId(data.id);
@@ -24,7 +25,7 @@ const Drawer = ({ onClose, onRemove, items = [], opened }) => {
 
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete(`https://6357cd27c26aac906f32dc62.mockapi.io/cart/${item.id}`);
+        await axios.delete(`${instanceUrl}/cart/${item.id}`);
         await delay(1000);
       }
     } catch (error) {

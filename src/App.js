@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
+import instanceURL from './API/api';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import Home from './pages/Home';
@@ -20,9 +21,9 @@ function App() {
     async function fetchData() {
       try {
         const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
-          axios.get('https://6357cd27c26aac906f32dc62.mockapi.io/cart'),
-          axios.get('https://6357cd27c26aac906f32dc62.mockapi.io/favorites'),
-          axios.get('https://6357cd27c26aac906f32dc62.mockapi.io/items'),
+          axios.get(`${instanceURL}/cart`),
+          axios.get(`${instanceURL}/favorites`),
+          axios.get(`${instanceURL}/items`),
         ]);
 
         setIsLoading(false);
@@ -43,10 +44,10 @@ function App() {
       const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id));
       if (findItem) {
         setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
-        await axios.delete(`https://6357cd27c26aac906f32dc62.mockapi.io/cart/${findItem.id}`);
+        await axios.delete(`${instanceURL}/cart/${findItem.id}`);
       } else {
         setCartItems((prev) => [...prev, obj]);
-        const { data } = await axios.post('https://6357cd27c26aac906f32dc62.mockapi.io/cart', obj);
+        const { data } = await axios.post(`${instanceURL}/cart`, obj);
         setCartItems((prev) =>
           prev.map((item) => {
             if (item.parentId === data.parentId) {
@@ -67,7 +68,7 @@ function App() {
 
   const onRemoveItem = (id) => {
     try {
-      axios.delete(`https://6357cd27c26aac906f32dc62.mockapi.io/cart/${id}`);
+      axios.delete(`${instanceURL}/cart/${id}`);
       setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
     } catch (error) {
       alert('Ошибка при удалении из корзины');
@@ -78,11 +79,11 @@ function App() {
   const onAddToFavorite = async (obj) => {
     try {
       if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-        axios.delete(`https://6357cd27c26aac906f32dc62.mockapi.io/favorites/${obj.id}`);
+        axios.delete(`${instanceURL}/favorites/${obj.id}`);
         setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
       } else {
         const { data } = await axios.post(
-          'https://6357cd27c26aac906f32dc62.mockapi.io/favorites',
+          `${instanceURL}/favorites`,
           obj,
         );
         setFavorites((prev) => [...prev, data]);
